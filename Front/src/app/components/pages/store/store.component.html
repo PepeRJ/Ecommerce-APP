@@ -1,0 +1,116 @@
+<section class="store">
+  
+  @for (producto of productos$ | async; track $index ) {
+    <div class="card">
+      <img [src]="producto.imagen_url" [alt]="producto.nombre" class="card__image">
+      <h3 class="card__title">{{ producto.nombre }}</h3>
+      <p class="card__description">{{ producto.descripcion }}</p>
+      <p class="card__price">Precio: {{ producto.precio }}€</p>
+      <p class="card__stock">Stock: {{ producto.stock }}</p>
+      <input type="number" [(ngModel)]="producto.cantidadSeleccionada" placeholder="Cantidad" min="1" max="{{ producto.stock }}" class="card__quantity">
+      <button mat-flat-button (click)="agregarAlCarrito(producto)" class="card__button">Agregar al Carrito</button>
+
+      @if(producto.productoAgregado) {
+        <div class="card__success-message">
+          Producto añadido
+        </div>
+      }
+
+      @if (producto.mostrarMensajeNoUnidades) {
+        <div class="card__no-unidades-message">
+          Ya no quedan más unidades.
+        </div>
+      }
+
+      @if (mostrarMensajeError && !esUsuarioPermitido) {
+        <div class="card__error-message">
+          Tienes que iniciar sesión para añadir productos al carrito.
+        </div>
+      }
+      @if (!mostrarFormularioCrear && UsuarioPermitido()) { 
+      
+          <button (click)="mostrarFormularioCrear = !mostrarFormularioCrear" class="card__button--create">Crear</button>
+ 
+      }
+
+      @if (esUsuarioPermitido) {
+        <button (click)="iniciarEdicion(producto)" class="card__button--edit">Editar</button>
+      }
+
+      @if (esUsuarioPermitido && !editando) {
+        <button (click)="eliminarProducto(producto.id)" class="card__button--delete">Eliminar</button>
+      }
+
+      @if (errorEdicion) {
+        <div class="card__error-message">
+          Tienes que rellenar todos los campos.
+        </div>
+      }
+
+      <div class="crear-producto">
+
+
+        @if (mostrarFormularioCrear && esUsuarioPermitido) {
+          <div class="crear-producto__form">
+            @if (errorCreacion) {
+              <div class="crear-producto__error-message">
+                {{ errorCreacion }}
+              </div>
+            }
+            <form (ngSubmit)="crearProducto()">
+              <div class="crear-producto__field">
+                <label for="nombre" class="crear-producto__label">Nombre:</label>
+                <input id="nombre" type="text" [(ngModel)]="nuevoProducto.nombre" name="nombre" required class="crear-producto__input">
+              </div>
+              <div class="crear-producto__field">
+                <label for="descripcion" class="crear-producto__label">Descripción:</label>
+                <textarea id="descripcion" [(ngModel)]="nuevoProducto.descripcion" name="descripcion" required class="crear-producto__textarea"></textarea>
+              </div>
+              <div class="crear-producto__field">
+                <label for="precio" class="crear-producto__label">Precio:</label>
+                <input id="precio" type="number" [(ngModel)]="nuevoProducto.precio" name="precio" required class="crear-producto__input">
+              </div>
+              <div class="crear-producto__field">
+                <label for="stock" class="crear-producto__label">Stock:</label>
+                <input id="stock" type="number" [(ngModel)]="nuevoProducto.stock" name="stock" required class="crear-producto__input">
+              </div>
+              <div class="crear-producto__field">
+                <label for="imagen_url" class="crear-producto__label">URL de la imagen:</label>
+                <input id="imagen_url" type="text" [(ngModel)]="nuevoProducto.imagen_url" name="imagen_url" required class="crear-producto__input">
+              </div>
+              <div class="crear-producto__actions">
+                <button type="submit" class="crear-producto__button">Crear Producto</button>
+                <button type="button" (click)="cancelarCreacion()" class="crear-producto__button--cancel">Cancelar</button>
+              </div>
+            </form>
+          </div>
+       
+        } </div>
+      
+
+      @if (editando && productoEditado.id === producto.id) {
+        <form (ngSubmit)="guardarCambios()" class="card__form">
+          <label for="nombre" class="card__label">Nombre:</label>
+          <input id="nombre" type="text" [(ngModel)]="productoEditado.nombre" name="nombre" required class="card__input">
+          <label for="descripcion" class="card__label">Descripción:</label>
+          <textarea id="descripcion" [(ngModel)]="productoEditado.descripcion" name="descripcion" required class="card__textarea"></textarea>
+          <label for="precio" class="card__label">Precio:</label>
+          <input id="precio" type="number" [(ngModel)]="productoEditado.precio" name="precio" required class="card__input">
+          <label for="stock" class="card__label">Stock:</label>
+          <input id="stock" type="number" [(ngModel)]="productoEditado.stock" name="stock" required class="card__input">
+          <label for="imagen_url" class="card__label">URL de la imagen:</label>
+          <input id="imagen_url" type="text" [(ngModel)]="productoEditado.imagen_url" name="imagen_url" required class="card__input">
+          <div class="card__actions">
+            <button type="submit" class="card__button">Guardar cambios</button>
+            <button type="button" (click)="cancelarEdicion()" class="card__button--cancel">Cancelar</button>
+          </div>
+        </form>
+        @if (mensajeError) {
+          <div class="card__error-message">
+            {{ mensajeError }}
+          </div>
+        }
+      }
+    </div>
+  }
+</section>

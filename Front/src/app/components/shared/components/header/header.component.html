@@ -1,0 +1,25 @@
+<header class="header">
+    <div class="logo" [routerLink]="['']">PepeRJ.</div>
+    @if(!showMenu){
+      <i class='bx bx-menu' id="menu-icon" (click)="toggleMenu()"></i>
+  }
+  @if(showMenu){
+      <i class='bx bx-x' id="close-icon" (click)="toggleMenu()"></i>
+      }
+    <nav class="navbar" [ngClass]="{ 'active': showMenu }">
+      <a [routerLink]="['']">Tienda</a>
+      @if(!estaAutenticado){
+      <a [routerLink]="['/login']">Login</a>
+    }
+      @if (estaAutenticado) {
+        <a [routerLink]="'/perfil/' + idUsuario">Perfil</a>
+      
+        <a [routerLink]="['/carrito']">Carrito
+
+          <mat-icon aria-hidden="false" [matBadge]="carritoSvc.cantidadProductosEnCarrito()">shopping_cart</mat-icon>
+
+
+        </a>
+      <a (click)="cerrarSesion()">Cerrar Sesión</a>}
+    </nav>
+  </header>

@@ -1,0 +1,101 @@
+<section class="login">
+    <h1 class="login__title">Bienvenido a Nuestra Tienda</h1>
+    <img class="login__logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS8GjNgoNnRN4a13KqZCgVIKeSIE30qmlmug&usqp=CAU" alt="Logo">
+  
+    <button mat-button class="login__button--store" [routerLink]="['']">Ir a la tienda</button>
+    
+    <div class="login__buttons">
+      @if (!mostrarLogin && !mostrarRegistro) {
+          <button mat-button class="login__button" (click)="mostrarLoginForm()">Iniciar Sesión</button>
+          <button mat-button class="login__button" (click)="mostrarRegistroForm()">Registrarse</button>
+      }
+    </div>
+    
+    @if (mostrarLogin) {
+      @if (errorInicioSesion) {
+        <div class="login__error-message">{{ errorInicioSesion }}</div>
+      }
+      <form class="login__form" [formGroup]="loginForm" (ngSubmit)="inicioSesion()">
+        <h2 class="login__form-title">Iniciar Sesión</h2>
+        <mat-form-field appearance="fill">
+          <mat-label>Correo Electrónico</mat-label>
+          <input matInput type="email" id="username" formControlName="username" required>
+          @if(loginForm.get('username')?.hasError('required')) {
+            <mat-error>Correo Electrónico es obligatorio</mat-error>
+          }
+          @if(loginForm.get('username')?.hasError('email')) {
+            <mat-error>Correo Electrónico no es válido</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" id="password" formControlName="password" required>
+          @if(loginForm.get('password')?.hasError('required')) {
+            <mat-error>Contraseña es obligatoria</mat-error>
+          }
+        </mat-form-field>
+        <div class="login__form-buttons">
+          <button mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
+          <button mat-button type="button" (click)="cerrarFormularios()">Cerrar</button>
+        </div>
+      </form>
+    }
+  
+    @if (mostrarRegistro) {
+      @if (errorRegistro) {
+        <div class="login__error-message">{{ errorRegistro }}</div>
+      }
+      <form class="login__form" [formGroup]="registroForm" (ngSubmit)="registro()">
+        <h2 class="login__form-title">Registro</h2>
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" id="nombre" formControlName="nombre" required>
+          @if(registroForm.get('nombre')?.hasError('required')) {
+            <mat-error>Nombre es obligatorio</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Apellidos</mat-label>
+          <input matInput type="text" id="apellidos" formControlName="apellidos" required>
+          @if(registroForm.get('apellidos')?.hasError('required')) {
+            <mat-error>Apellidos son obligatorios</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Correo Electrónico</mat-label>
+          <input matInput type="email" id="emailRegistro" formControlName="emailRegistro" required>
+          @if(registroForm.get('emailRegistro')?.hasError('required')) {
+            <mat-error>Correo Electrónico es obligatorio</mat-error>
+          }
+          @if(registroForm.get('emailRegistro')?.hasError('email')) {
+            <mat-error>Correo Electrónico no es válido</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" id="passwordRegistro" formControlName="passwordRegistro" required>
+          @if(registroForm.get('passwordRegistro')?.hasError('required')) {
+            <mat-error>Contraseña es obligatoria</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Dirección</mat-label>
+          <input matInput type="text" id="direccion" formControlName="direccion" required>
+          @if(registroForm.get('direccion')?.hasError('required')) {
+            <mat-error>Dirección es obligatoria</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Teléfono</mat-label>
+          <input matInput type="text" id="telefono" formControlName="telefono" required>
+          @if(registroForm.get('telefono')?.hasError('required')) {
+            <mat-error>Teléfono es obligatorio</mat-error>
+          }
+        </mat-form-field>
+        <div class="login__form-buttons">
+          <button mat-raised-button color="primary" type="submit">Registrarse</button>
+          <button mat-button type="button" (click)="cerrarFormularios()">Cerrar</button>
+        </div>
+      </form>
+    }
+  </section>

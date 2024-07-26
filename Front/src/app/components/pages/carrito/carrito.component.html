@@ -1,0 +1,43 @@
+<section class="carrito">
+  <h2 class="carrito__title">Carrito de Compras</h2>
+  @if(carrito().carritoProductos.length === 0) {
+    <p class="carrito__empty-message">El carrito está vacío</p>
+  }
+  @if(carrito().carritoProductos.length > 0 || carritoVacio()) {
+    <div class="carrito__items">
+      @for (producto of carrito().carritoProductos; track $index) {
+        @if(producto.cantidad > 0) {
+          <div class="carrito__item producto-item">
+            <div class="producto-item__nombre">{{ producto.producto.nombre }}</div>
+            <div class="producto-item__precio">Precio: {{ producto.producto.precio * producto.cantidad }}€</div>
+            <div class="producto-item__cantidad">Cantidad: {{ producto.cantidad }}</div>
+            <button mat-stroked-button class="producto-item__button--increase" (click)="modificarCantidad(producto.producto.id, producto.cantidad + 1)">Aumentar Cantidad</button>
+            @if(cantidadProductosEnCarrito() > 1){
+              <button  mat-stroked-button class="producto-item__button--decrease" (click)="modificarCantidad(producto.producto.id, producto.cantidad - 1)">Disminuir Cantidad</button>
+            }
+            @else{
+              <button mat-stroked-button class="producto-item__button--clear" (click)="vaciarCarrito()">Disminuir Cantidad</button>
+            }
+          </div>
+        }
+        @if(mostrarMensajeNoUnidades()) {
+            <div class="producto-item__no-unidades-message">Ya no quedan más unidades.</div>
+        }
+      }
+      @if(carrito().precioTotal > 0) {
+        <div class="carrito__total">
+          <p class="carrito__total-precio">Precio Total: {{ carrito().precioTotal }}€</p>
+        </div>
+        <div class="carrito__buttons">
+        <button mat-button class="carrito__button--buy" (click)="realizarCompra()">Comprar</button>
+        <button mat-button class="carrito__button--clear" (click)="vaciarCarrito()">Vaciar Carrito</button>
+      </div>}
+    </div>
+  } @else {
+    <div class="carrito__empty-message-container"><p class="carrito__empty-message">El carrito está vacío.</p></div>
+  }
+
+  @if(mostrarMensajeCompraRealizada()) {
+    <div class="modal modal--success">La compra se ha realizado</div>
+  }
+</section>

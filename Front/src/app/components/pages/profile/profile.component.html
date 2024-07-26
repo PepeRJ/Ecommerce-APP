@@ -1,0 +1,106 @@
+<section class="perfil"> 
+  @if (datosPerfil) {
+    <div class="datos-edicion">
+      <div class="datos-personales">
+        <h2 class="datos-personales__title">Datos Personales</h2>
+        <p class="datos-personales__item"><strong>Nombre:</strong> {{ datosPerfil.nombre }}</p>
+        <p class="datos-personales__item"><strong>Apellidos:</strong> {{ datosPerfil.apellidos }}</p>
+        <p class="datos-personales__item"><strong>Correo Electrónico:</strong> {{ datosPerfil.correo_electronico }}</p>
+        <p class="datos-personales__item"><strong>Dirección:</strong> {{ datosPerfil.direccion }}</p>
+          @if (datosPerfil.telefonos) {
+          <ul class="datos-personales__list">
+            @for (telefono of datosPerfil.telefonos; track telefono.numero) {
+              <li class="datos-personales__list-item">
+                <p class="datos-personales__item"><strong>Teléfono:</strong> {{ telefono?.numero }}</p>
+              </li>
+            }
+          </ul>
+        }
+       
+
+      </div>
+
+      <div class="edicion-perfil">
+        <h2 class="edicion-perfil__title">Editar Perfil</h2>
+        <div class="edicion-perfil__item">
+          <div class="edicion-perfil__label-btns">
+          <label for="contrasenya" class="edicion-perfil__label">Cambiar Contraseña:</label>
+          @if (editandoContrasenya) {
+            <input type="password" id="contrasenya" [(ngModel)]="nuevosDatos.contrasenya" class="edicion-perfil__input"/>
+            <button mat-stroked-button (click)="guardarEdicion('contrasenya')" class="edicion-perfil__button">Guardar</button>
+            <button mat-stroked-button (click)="cancelarEdicion()" class="edicion-perfil__button">Cancelar</button>
+          } @else {
+            <button mat-stroked-button (click)="habilitarEdicion('contrasenya')" class="edicion-perfil__button">Editar</button>
+          }</div>
+          @if( mostrarMensajeEditadoContrasenya){
+            <div class="mensaje-exito">
+              <p>¡Editado correctamente!</p>
+            </div>
+          }
+        </div>
+
+        <div class="edicion-perfil__item">
+          <div class="edicion-perfil__label-btns">
+          <label for="direccion" class="edicion-perfil__label">Cambiar la Dirección:</label>
+          @if (editandoDireccion) {
+            <input type="text" id="direccion" [(ngModel)]="nuevosDatos.direccion" class="edicion-perfil__input"/>
+            <button mat-stroked-button (click)="guardarEdicion('direccion')" class="edicion-perfil__button">Guardar</button>
+            <button mat-stroked-button (click)="cancelarEdicion()" class="edicion-perfil__button">Cancelar</button>
+          } @else {
+            <button mat-stroked-button (click)="habilitarEdicion('direccion')" class="edicion-perfil__button">Editar</button>
+          }</div>
+          @if(mostrarMensajeEditadoDireccion){
+            <div class="mensaje-exito">
+              <p>¡Editado correctamente!</p>
+            </div>
+          }
+        </div>
+
+        <div class="edicion-perfil__item">
+          <div class="edicion-perfil__label-btns">
+          <label for="telefonos" class="edicion-perfil__label">Nuevos Teléfonos:</label>
+          @if (editandoTelefono) {
+            <input type="text" id="telefono" name="telefono" [(ngModel)]="telefono" (input)="agregarTelefono()" class="edicion-perfil__input"/>
+            <button mat-stroked-button (click)="guardarEdicion('telefonos')" class="edicion-perfil__button">Guardar</button>
+            <button mat-stroked-button (click)="cancelarEdicion()" class="edicion-perfil__button">Cancelar</button>
+          } @else {
+            <button mat-stroked-button (click)="habilitarEdicion('telefonos')" class="edicion-perfil__button">Editar</button>
+          }</div>
+          @if(mostrarMensajeEditadoTelefonos){
+            <div class="mensaje-exito">
+              <p>¡Editado correctamente!</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+  <div class="historial-pedidos">
+    <h2 class="historial-pedidos__title">Historial de Pedidos</h2>
+    <table class="historial-pedidos__table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Precio Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (historialPedidos.length > 0) {
+          @for (pedido of historialPedidos; track pedido.id) {
+            <tr>
+              <td>{{ pedido.fecha | date:'medium' }}</td>
+              <td>{{ pedido.estado }}</td>
+              <td>{{ pedido.precio_total | currency:'EUR':'symbol':'1.2-2' }}</td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <td colspan="3">No hay historial de pedidos para este usuario.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

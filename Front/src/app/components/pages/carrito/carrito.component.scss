@@ -1,0 +1,102 @@
+.carrito {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  
+    &__title {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+    }
+    
+    &__empty-message-container,
+    &__empty-message {
+      font-size: 1.2em;
+      margin-top: 15px;
+      color: #555;
+    }
+  
+
+  
+    &__total {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    }
+  
+    &__total-precio {
+      font-size: 1.2em;
+      margin-top: 15px;
+    }
+    &__buttons{
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+    }
+  
+    &__button--buy,
+    &__button--clear {
+      padding: 8px;
+      font-size: 0.9em;
+      background-color: #3498db;
+      color: #fff;
+      border-radius: 0;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+  }
+  
+  .producto-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+  
+    &__nombre {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  
+    &__precio,
+    &__cantidad {
+      font-size: 1em;
+      margin-top: 5px;
+    }
+  
+    &__button--increase,
+    &__button--decrease,
+    &__button--clear {
+      padding: 8px;
+      font-size: 0.9em;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+  
+    &__no-unidades-message {
+      color: #c0392b;
+      margin-top: 10px;
+    }
+  }
+  
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 2rem;
+    padding: 1.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    line-height: 1.5;
+    text-align: center;
+  
+    &--success {
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }

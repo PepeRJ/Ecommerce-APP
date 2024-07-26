@@ -1,0 +1,52 @@
+.login {
+    padding: 4rem 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    &__title {
+      width: 50%;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    
+    &__logo {
+      height: 200px;
+      width: 200px;
+    }
+  
+  
+    &__buttons {
+      display: block;
+      text-align: center;
+    }
+  
+  
+    &__form {
+      display: flex;
+      flex-direction: column;
+  
+      &-title {
+        text-align: center;
+      }
+      
+      mat-form-field {
+        width: 300px;
+        margin-top: 0.5rem;
+      }
+    }
+  
+    &__form-buttons {
+      display: block;
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 680px) {
+    .login__title {
+      font-size: 33px;
+      line-height: 1.3;
+    }
+  }
+  
