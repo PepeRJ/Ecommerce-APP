@@ -9,15 +9,19 @@ Esta tienda en línea fue desarrollada utilizando las siguientes tecnologías:
 - **Node.js con Express:** Para el backend que facilita la comunicación y gestión de datos.
 - **MySQL (en la nube):** Base de datos relacional para almacenar datos del eCommerce.
 - **Sequelize:** ORM para interactuar con la base de datos MySQL de manera eficiente.
+- 
 
 Esta combinación tecnológica permitió crear una plataforma eficiente y escalable, asegurando una experiencia de compra fluida y moderna.
 
 ## Características
 
-- Catálogo de productos interactivo.
-- Funcionalidad para agregar productos al carrito y realizar compras.
-- Diseño moderno y atractivo utilizando Angular Material.
-- Backend robusto con Node.js y Express conectado a una base de datos MySQL en la nube a través de Sequelize.
+- Catálogo de productos interactivo: Muestra de productos con detalles y funcionalidades de búsqueda.
+- Funcionalidad de carrito de compras: Permite agregar productos y realizar compras de manera intuitiva.
+- CRUD (Create, Read, Update, Delete): Implementado para gestionar productos, usuarios y pedidos en la base de datos.
+- Diseño moderno y atractivo: Utilizando Angular Material para una experiencia de usuario mejorada.
+- Backend robusto con Node.js y Express: Conectado a una base de datos MySQL en la nube a través de Sequelize.
+- Inicio de sesión y manejo de sesiones: Utilizando cookies para mantener las sesiones de usuario seguras y persistentes.
+- Seguridad en contraseñas: Las contraseñas de los usuarios se encriptan utilizando bcrypt para garantizar su seguridad.
 
 ## Prueba la Aplicación
 
