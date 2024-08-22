@@ -34,14 +34,7 @@ Puedes ver el despliegue de la aplicación en este video: [YouTube Video Demo](h
 
 ## Instalación
 
-1. **Clona este repositorio:**
-
-    ```bash
-    git clone https://github.com/tu-usuario/nombre-del-repositorio.git
-    cd nombre-del-repositorio
-    ```
-
-2. **Instala las dependencias del frontend y del backend:**
+1. **Instala las dependencias del frontend y del backend:**
 
     ```bash
     cd frontend
